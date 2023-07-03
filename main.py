@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import accuracy_score
 import xgboost as xgb
 
 
@@ -75,12 +76,13 @@ model = xgb.train(params=params,
 # Addind early_stopping_rounds to stop xgb from overfitting (less training loss but high validation loss)
 print("----------------------------------------------------")
 
-model = xgb.train(params=params,
+model_pred = xgb.train(params=params,
                   dtrain=dtrain_reg,
                   num_boost_round=1000,
                   evals=evals,
                   verbose_eval=50,
                   early_stopping_rounds=50) # activate early stop after 50 rounds of no validation improvements
+
 
 print("----------------------------------------------------")
 
@@ -132,5 +134,17 @@ results2 = xgb.cv(params=params2,
                  metrics=["mlogloss", "auc","merror"]
                  )
 
-results2.keys()
-print("results: ", results2["test-auc-mean"].max())
+test_model = xgb.train(params=params2,
+                 dtrain=dtrain_clf,
+                 num_boost_round=100
+                 )
+
+pred = test_model.predict(dtest_clf)
+print(f"classification accuracy: {accuracy_score(y_test,pred)}")
+
+# prediction accuracy: 
+
+# results2.keys()
+# print("results: ", results2["test-auc-mean"].max())
+
+# result accuracy: 0.9403
