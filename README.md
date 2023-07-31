@@ -7,7 +7,8 @@ XGBoost is an open-source, scalable machine learning library that provides gradi
 The dataset used for this project is called diamonds.csv. It contains information about diamonds, including features such as carat weight, cut, color, clarity, depth, table, and price. This dataset is commonly used in machine learning tutorials and competitions and can be found in the data folder.
 
 Download the dataset from the following link and place it in the data folder:
-diamonds.csv
+
+[diamonds.csv](https://github.com/vhuni/xgboost_test/blob/main/diamonds.csv)
 
 ## Requirements
 To run the code in this repository, you need to have the following installed:
